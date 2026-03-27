@@ -1,0 +1,32 @@
+.mainBody
+{
+    -fx-background-image: url('/main/resources/assets/lines.jpg');
+    -fx-background-size: cover;
+    -fx-background-position: center;
+    -vfx-font-family: "Magneto";
+    -fx-text-fill: white;
+
+}
+
+.buttons
+{
+    -fx-background-color: #30c0b7;
+    -fx-font-style: bold;
+}
+
+.playerPane
+{
+    /*-fx-border-color: #30c0b7;*/
+    -fx-border-width: 4;
+    -fx-border-radius: 5;
+}
+
+ColorPicker
+{
+    -fx-border-radius: 5;
+}
+
+Slider
+{
+    -fx-cursor: pointer;
+}
