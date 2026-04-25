@@ -1,0 +1,164 @@
+#include <iostream>
+#include <cstring>
+#include <cassert>
+using namespace std;
+
+class Dish
+{
+    char* name;
+    char* recipe;
+    unsigned int calories;
+    void copyFrom(const Dish& other)
+    {
+        name = new char[strlen(other.name) + 1];
+        strcpy(name, other.name);
+        recipe = new char[strlen(other.recipe) + 1];
+        strcpy(recipe, other.recipe);
+        calories = other.calories;
+    }
+    void free()
+    {
+        delete[] name;
+        delete[] recipe;
+    }
+public:
+    Dish(const char* n = "default", const char* r = "default", unsigned int c = 1)
+    {
+        assert(n && *n);
+        assert(r && *r);
+        assert(c > 0);
+        name = new char[strlen(n) + 1];
+        strcpy(name, n);
+        recipe = new char[strlen(r) + 1];
+        strcpy(recipe, r);
+        calories = c;
+    }
+    Dish(const Dish& other)
+    {
+        copyFrom(other);
+    }
+    Dish& operator=(const Dish& other)
+    {
+        if (this != &other)
+        {
+            free();
+            copyFrom(other);
+        }
+        return *this;
+    }
+    ~Dish()
+    {
+        free();
+    }
+    const char* getName() const { return name; }
+    const char* getRecipe() const { return recipe; }
+    unsigned int getCalories() const { return calories; }
+    bool operator==(const Dish& other) const
+    {
+        return strcmp(name, other.name) == 0 &&
+               strcmp(recipe, other.recipe) == 0 &&
+               calories == other.calories;
+    }
+    bool operator<(const Dish& other) const
+    {
+        if (calories != other.calories)
+            return calories < other.calories;
+        return strcmp(name, other.name) < 0;
+    }
+};
+
+class Menu
+{
+    Dish* dishes;
+    unsigned int count;
+    unsigned int capacity;
+    unsigned int maxCalories;
+    unsigned int totalCalories() const
+    {
+        unsigned int sum = 0;
+        for (unsigned int i = 0; i < count; i++)
+            sum += dishes[i].getCalories();
+        return sum;
+    }
+public:
+    Menu(unsigned int maxCal, unsigned int cap = 100)
+        : count(0), capacity(cap), maxCalories(maxCal)
+    {
+        dishes = new Dish[capacity];
+    }
+    ~Menu()
+    {
+        delete[] dishes;
+    }
+    Menu(const Menu&) = delete;
+    Menu& operator=(const Menu&) = delete;
+    Menu& operator+=(const Dish& d)
+    {
+        if (count >= capacity)
+            return *this;
+        if (totalCalories() + d.getCalories() > maxCalories)
+            return *this;
+        dishes[count++] = d;
+        return *this;
+    }
+    Menu& operator-=(const Dish& d)
+    {
+        for (unsigned int i = 0; i < count;)
+        {
+            if (dishes[i] == d)
+            {
+                for (unsigned int j = i; j < count - 1; j++)
+                    dishes[j] = dishes[j + 1];
+                count--;
+            }
+            else i++;
+        }
+        return *this;
+    }
+    const Dish& operator[](unsigned int index) const
+    {
+        assert(index < count);
+        return dishes[index];
+    }
+    int operator()(const char* ingredient) const
+    {
+        int bestIndex = -1;
+        for (unsigned int i = 0; i < count; i++)
+        {
+            if (strstr(dishes[i].getRecipe(), ingredient))
+            {
+                if (bestIndex == -1 || dishes[i] < dishes[bestIndex])
+                    bestIndex = i;
+            }
+        }
+        return bestIndex;
+    }
+    void print() const
+    {
+        for (unsigned int i = 0; i < count; i++)
+            cout << dishes[i].getName() << " | " << dishes[i].getCalories() << endl;
+    }
+};
+
+int main()
+{
+    Menu menu(1000);
+    Dish d1("Salad", "tomato cucumber eggs", 200);
+    Dish d2("Soup", "water eggs salt", 150);
+    Dish d3("Pizza", "flour cheese", 500);
+    Dish d4("Omelette", "eggs butter", 250);
+    menu += d1;
+    menu += d2;
+    menu += d3;
+    menu += d4;
+    menu.print();
+    int index = menu("eggs");
+    if (index != -1)
+    {
+        cout << "Lowest calorie with eggs: " << menu[index].getName() << endl;
+        menu -= menu[index];
+    }
+    cout << "\nAfter removal:\n";
+    menu.print();
+    return 0;
+}
