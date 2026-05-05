@@ -14,7 +14,7 @@ import javafx.stage.Stage;
  * Window resizing is disabled to preserve playground layout consistency.
  * </p>
  *
- * @author YourName
+ * @author viki441
  * @version 1.0
  */
 public class mainApp extends Application {
