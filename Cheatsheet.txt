@@ -359,6 +359,7 @@ Hypotheses
 H0:r=0 (no correlation)
 
 H1:r!=0 (there is correlation)
+p-value < 0.05 -> significant correlation.
 ==============================
 t-test	numerical vs categorical
 ANOVA	numerical vs categorical (>2 groups)
