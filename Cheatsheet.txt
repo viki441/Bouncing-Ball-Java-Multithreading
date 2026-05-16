@@ -353,10 +353,16 @@ IF NOT NORMAL DATA -> Kruskal-Wallis:
 kruskal.test(score ~ group, data = df) 
 AND THEN DO
  pairwise.wilcox.test()
+========================================================================
+Use cor.test() when you want to check whether two numerical variables are related.
+Hypotheses
+H0:r=0 (no correlation)
 
-
-
-
+H1:r!=0 (there is correlation)
+==============================
+t-test	numerical vs categorical
+ANOVA	numerical vs categorical (>2 groups)
+cor.test	numerical vs numerical
 
 
 
