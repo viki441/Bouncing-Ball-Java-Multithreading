@@ -1,3 +1,22 @@
+install.packages(c(
+  "ggplot2",
+  "ggpubr",
+  "nortest",
+  "gplots",
+  "rstatix",
+  "dplyr"
+))
+ip <- installed.packages()[, 1] #   показва инсталираните пакети
+pfi <- setdiff(c("ggplot2", "ggpubr", "nortest", "gplots", "rstatix"), ip)
+#   Горният ред показва кои пакети не са инсталирани
+if(length(pfi) > 0) {install.packages(pfi)}
+
+library("ggplot2")
+library("ggpubr")
+library("nortest")  #   Тестове за проверка на нормално разпределение
+library("gplots")
+
+
 1. Биномно разпределение (Binomial)
 Моделира броя успехи в фиксиран брой независими опити.
 rbinom(n, size, prob) 
