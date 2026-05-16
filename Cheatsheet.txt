@@ -303,6 +303,7 @@ else -> appr. normal
 
 ----------------------------IZBOR NA TEST---------------------------------------------
 CASE A — ONE GROUP --> USE sample t.test or wilcoxon test
+use shapiro.test(..) and if normal use t.test if not use wilcoxon
 “Is the average salary equal to 2000?” 
 
 T.TEST --> PRI NORMAL DATA
