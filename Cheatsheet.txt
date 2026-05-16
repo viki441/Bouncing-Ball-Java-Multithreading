@@ -336,6 +336,12 @@ CASE C — MORE THAN TWO GROUPS
 
 IF NORMAL -> ANOVA
 summary(aov(rent ~ region, data = df))
+If there are NO stars
+It means:
+p-value > 0.05
+So:you FAIL to reject H0
+there is NOT enough evidence of differences between groups
+
 -->if p-value is regected --> anova says atleast 1 group differs
 
 ANOTHER TEST FOR NORMAL:
