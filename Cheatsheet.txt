@@ -1,0 +1,356 @@
+1. Биномно разпределение (Binomial)
+Моделира броя успехи в фиксиран брой независими опити.
+rbinom(n, size, prob) 
+
+dbinom(x, size, prob) - 
+	dbinom(x = 3, size = 5, prob = 0.4)
+	Probability of getting exactly 3 successes in 5 trials.
+
+pbinom(q, size, prob) - probability за ≤ x успеха
+	pbinom(q = 3, size = 5, prob = 0.4)
+	Probability of getting: 0, 1, 2, or 3 successes.
+
+qbinom(p, size, prob) - procenti
+	qbinom(p = 0.95, size = 5, prob = 0.4)
+	Finds the smallest number x such that: P(X ≤ x) ≥ 0.95
+
+=====================================================================
+2. Геометрично разпределение (Geometric)
+Моделира броя неуспехи до първия успех.
+rgeom(n, prob)
+
+dgeom(x, prob) - exact probability
+	dgeom(x = 2, prob = 0.3)
+	Probability of: 2 failures before first success.
+
+pgeom(q, prob)
+	pgeom(q = 2, prob = 0.3)
+	Probability of: at most 2 failures before success.
+
+qgeom(p, prob)
+	qgeom(p = 0.9, prob = 0.3)
+	Finds failure threshold for cumulative probability 90%.
+============================================================================
+3. Отрицателно биномно (Negative Binomial)
+Моделира броя неуспехи до k-тия успех.
+Генерализация на geometric distribution.
+rnbinom(n, size, prob)
+
+dnbinom(x, size, prob)
+	dnbinom(x = 4, size = 3, prob = 0.4)
+	Probability of: 4 failures before 3 successes.
+
+pnbinom(q, size, prob)
+	pnbinom(q = 4, size = 3, prob = 0.4)
+	Probability of: at most 4 failures before 3 successes.
+
+qnbinom(p, size, prob)
+	qnbinom(p = 0.95, size = 3, prob = 0.4)
+	Finds failure threshold for 95% probability.
+===================================================================
+4. Поасоново разпределение (Poisson)
+Моделира брой редки събития за време/пространство.
+Събитията са независими и се случват с постоянна скорост.
+rpois(n, lambda)
+
+dpois(x, lambda)
+	dpois(x = 3, lambda = 4)
+	Probability of exactly 3 events.
+	
+ppois(q, lambda)
+	ppois(q = 3, lambda = 4) 
+	Probability of: 0,1,2,3 events.	
+
+qpois(p, lambda)
+	qpois(p = 0.95, lambda = 4)
+	Event threshold for 95% cumulative probability.
+	
+======================================================================
+5. Равномерно разпределение (Uniform)
+Всички стойности между a и b са еднакво вероятни.
+Няма „предпочитани“ стойности.
+runif(n, min, max)
+
+dunif(x, min, max)
+	dunif(x = 3, min = 0, max = 10)
+	Density at x = 3.
+
+punif(q, min, max)
+	punif(q = 3, min = 0, max = 10)
+	Probability of: getting value ≤ 3.
+
+qunif(p, min, max)
+	qunif(p = 0.8, min = 0, max = 10)
+	Finds value corresponding to 80th percentile.
+
+=====================================================================
+6. Нормално разпределение (Normal)
+Най-важното непрекъснато разпределение.
+Симетрично, камбановидно, описва много естествени явления.
+rnorm(n, mean, sd)
+
+dnorm(x, mean, sd)
+	dnorm(x = 100, mean = 100, sd = 15)
+	Density at x = 100.
+
+pnorm(q, mean, sd)
+	pnorm(q = 115, mean = 100, sd = 15)
+	Probability of: value ≤ 115.
+
+qnorm(p, mean, sd)
+	qnorm(p = 0.95, mean = 100, sd = 15)
+	Finds the 95th percentile.
+
+=================================================================
+7. Експоненциално разпределение (Exponential)
+Моделира времето между две Poisson events.
+Continuous version на geometric distribution.
+rexp(n, rate)
+
+dexp(x, rate)
+	dexp(x = 3, rate = 0.2)
+	Density at time = 3.
+
+pexp(q, rate)
+	pexp(q = 3, rate = 0.2)
+	Probability that waiting time ≤ 3.
+
+qexp(p, rate)
+	qexp(p = 0.95, rate = 0.2)
+	Waiting time for 95% probability.
+
+==========================================================================
+8. Gamma distribution
+Моделира positive continuous variables.
+Generalization на exponential distribution.
+rgamma(n, shape, rate)
+
+dgamma(x, shape, rate)
+	dgamma(x = 3, shape = 2, rate = 0.5)
+	Density at x = 3.
+
+pgamma(q, shape, rate)
+	pgamma(q = 3, shape = 2, rate = 0.5)
+	Probability that value ≤ 3.
+
+qgamma(p, shape, rate)
+	qgamma(p = 0.95, shape = 2, rate = 0.5)
+	Finds 95th percentile.
+
+================================================================================
+9. t-distribution
+Подобно на normal distribution, но с heavier tails.
+Използва се при:
+малки извадки
+неизвестно population SD.
+rt(n, df)
+	rt(n = 5, df = 10)
+	Simulates t-distributed values.
+
+dt(x, df)
+	dt(x = 2, df = 10)
+	Density at x = 2.
+
+pt(q, df)
+	pt(q = 2, df = 10)
+	Probability that T ≤ 2.
+	
+qt(p, df)
+	qt(p = 0.975, df = 10)
+	Critical t-value for 95% CI.
+
+==============================================================================
+10. Chi-square distribution
+Сума от квадрати на standard normal variables.
+Използва се за:
+categorical tests
+variance tests.
+rchisq(n, df)
+
+dchisq(x, df)
+	dchisq(x = 3, df = 4)
+	Density at x = 3.
+
+pchisq(q, df)
+	pchisq(q = 3, df = 4)
+	Probability that X ≤ 3.
+
+qchisq(p, df)
+	qchisq(p = 0.95, df = 4)
+	95th percentile of chi-square distribution.
+
+=================================================================================
+1. BELL
+x <- rnorm(1000, mean = 50, sd = 10)
+
+hist(x,
+     col = "skyblue",
+     main = "Histogram",
+     xlab = "Values")
+
+===========================================================================
+2. Right-Skewed Distribution
+x <- rexp(1000, rate = 0.2)
+
+hist(x,
+     col = "orange",
+     main = "Right-Skewed Distribution",
+     xlab = "Values")
+
+==============================================================================
+3. Uniform (“square”) Distribution
+x <- runif(1000, min = 0, max = 10)
+
+hist(x,
+     col = "green",
+     main = "Uniform Distribution",
+     xlab = "Values")
+
+================================================================================
+4. Basic Scatter Plot (plot)
+x <- 1:100
+y <- 2*x + rnorm(100, sd = 20)
+
+plot(x, y,
+     main = "Scatter Plot",
+     xlab = "X",
+     ylab = "Y",
+     pch = 19)
+
+==================================================================================
+5. Scatter Plot + Regression Line
+plot(x, y,
+     main = "Regression",
+     xlab = "X",
+     ylab = "Y")
+
+abline(lm(y ~ x),
+       col = "red",
+       lwd = 2)
+
+=====================================================================================
+6. Barplot
+categories <- c("A", "B", "C")
+counts <- c(10, 25, 15)
+
+barplot(counts,
+        names.arg = categories,
+        col = "purple",
+        main = "Barplot")
+
+========================================================================================
+7. Pie Chart
+pie(counts,
+    labels = categories,
+    main = "Pie Chart")
+
+========================================================
+8. Boxplotx <- rnorm(100)
+
+boxplot(x,
+        col = "lightblue",
+        main = "Boxplot")
+
+===========================================================
+9. Violin Plot (ggplot2)
+library(ggplot2)
+
+group <- rep(c("A", "B"), each = 100)
+value <- c(rnorm(100),
+           rnorm(100, mean = 2))
+
+ggplot(data.frame(group, value),
+       aes(x = group,
+           y = value,
+           fill = group)) +
+  geom_violin(trim = FALSE)
+
+===============================================================
+11. QQ Plot (Normality Check)
+
+x <- rnorm(100)
+
+qqnorm(x)
+qqline(x, col = "red")
+
+=====================================================================
+par(mfrow=c(2,2))
+================================
+library(corrplot)
+
+M <- cor(mtcars)
+
+corrplot(M)
+
+=================================================================================
+p-value < 0.05  → reject H0
+p-value >= 0.05 → fail to reject H0
+Null hypothesis
+
+H0
+Usually:
+
+“no difference”
+“mean equals value”
+“groups are equal”
+Alternative hypothesis
+
+H1
+What you actually want to prove.
+======================================================================================
+is data normal? use shapiro.test() -- ako p < 0.05 data is NOT NORMAL
+else -> appr. normal
+
+----------------------------IZBOR NA TEST---------------------------------------------
+CASE A — ONE GROUP --> USE sample t.test or wilcoxon test
+“Is the average salary equal to 2000?” 
+
+T.TEST --> PRI NORMAL DATA
+x <- c(10,12,13,11,9,10,14)
+t.test(x, mu = 10)
+
+WILCOXON --> PRI NOT NORMAL DATA (nonparametric)
+wilcox.test(x, mu = 10)
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+CASE B — TWO GROUPS
+“Do men and women have different salaries?”
+1.....check normality -> if both normal --> use t.test
+shapiro.test(group1)
+shapiro.test(group2)
+
+	2.....Check equal variances --> if p > 0.05 --> equal variances -->use t.test
+	var.test(group1, group2)
+
+	if  p>0.05 --> unequal variances--> use welch t-test:
+	t.test(group1, group2)
+
+1.....check normality -> if not normal --> use wilcoxon rank-sum
+wilcox.test(x,y)
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+CASE C — MORE THAN TWO GROUPS
+“Do 4 regions have different average rent prices?”
+
+IF NORMAL -> ANOVA
+summary(aov(rent ~ region, data = df))
+-->if p-value is regected --> anova says atleast 1 group differs
+
+ANOTHER TEST FOR NORMAL:
+POST-HOC TEST
+TukeyHSD(model) -- compares every pair
+
+
+IF NOT NORMAL DATA -> Kruskal-Wallis:
+kruskal.test(score ~ group, data = df) 
+AND THEN DO
+ pairwise.wilcox.test()
+
+
+
+
+
+
+
